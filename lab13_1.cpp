@@ -19,3 +19,36 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+
+void stat(const double A[], int N, double B[]){
+    double sum_art_mean, sum_std, sum_geo = 1, sum_harmo, min = A[0] , max = 0;
+    int n = 0;
+    for(int i = 0; i < N; i++){
+        if(A[i] < min) min = A[i];
+        else if(A[i] > max) max = A[i];
+        sum_art_mean += A[i];
+        n++;
+    }
+    B[0] = sum_art_mean/n;
+
+    for(int i = 0; i < N; i++){
+        sum_std += pow(A[i] - B[0], 2);
+    }
+    B[1] = sqrt( 1.0/n * sum_std);
+
+    for(int i = 0; i < N; i++){
+        sum_geo *= A[i];
+    }
+    B[2] = pow( sum_geo , 1.0/n);
+
+    for(int i = 0; i < N; i++){
+        sum_harmo += 1.0/A[i];
+    }
+    B[3] = n/sum_harmo;
+
+    B[4] = max;
+
+    B[5] = min;
+
+
+}
